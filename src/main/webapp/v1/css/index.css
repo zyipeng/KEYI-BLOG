@@ -1,0 +1,21 @@
+/*弹幕1 start*/
+.videoBox {
+    width: 100%;
+    height: 350px;
+    /*border: 1px solid #000;*/
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: url(../img/bg.jpg) no-repeat;
+    background-size: 100% 100%;
+}
+.danmu {
+    color: #f00;
+    font-size: 20px;
+    position: absolute;
+    left: 300px;
+    top: 0;
+    white-space: nowrap;
+}
+/*弹幕1 end*/
+

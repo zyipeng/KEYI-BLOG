@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.UserCategoryDao">
+    <select id="get" parameterType="java.lang.String" resultType="UserCategory">
+        select
+           ID,
+           NAME,
+           USER_ID,
+           PAR_ID,
+           DEL_FLAG
+        from user_category
+           ID = #{id}
+    </select>
+<!--    <select id="get" parameterType="java.lang.String" resultType="UserCategory">-->
+<!--    </select>-->
+    <select id="findChildList" resultType="CategoryNode" flushCache="true">
+        select
+            ID id,
+            NAME text,
+        concat(#{requestUrl},ID) href
+        from user_category
+        where
+            USER_ID=#{userId}
+            AND (DEL_FLAG =0 OR DEL_FLAG is null)
+        <choose>
+            <when test="parId != null and parId!= ''">
+                AND PAR_ID=#{parId}
+            </when>
+            <otherwise>
+                AND PAR_ID is null
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findList" parameterType="UserCategory" resultType="UserCategory">
+        select
+           ID,
+           NAME,
+           USER_ID,
+           PAR_ID,
+           DEL_FLAG
+        from user_category
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME= #{name}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="parId != null and parId!= ''">
+                AND PAR_ID= #{parId}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" parameterType="UserCategory" resultType="UserCategory">
+        select
+           ID,
+           NAME,
+           USER_ID,
+           PAR_ID,
+           DEL_FLAG
+        from user_category
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME= #{name}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="parId != null and parId!= ''">
+                AND PAR_ID= #{parId}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+        </where>
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="UserCategory">
+        select
+           ID,
+           NAME,
+           USER_ID,
+           PAR_ID,
+           DEL_FLAG
+        from user_category
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+    <insert id="insert" parameterType="UserCategory">
+         insert into user_category(
+            ID,
+            NAME,
+            USER_ID,
+            PAR_ID,
+            DEL_FLAG
+         ) values (
+            UUID(),
+            #{name},
+            #{userId},
+            #{parId},
+            #{delFlag}
+         )
+    </insert>
+
+    <update id="update" parameterType="java.lang.String">
+        update user_category
+        <set>
+            <if test="name != null ">
+                NAME= #{name},
+            </if>
+            <if test="userId != null ">
+                USER_ID= #{userId},
+            </if>
+            <if test="parId != null ">
+                PAR_ID= #{parId},
+            </if>
+            <if test="delFlag != null ">
+                DEL_FLAG= #{delFlag},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="delete" parameterType="UserCategory">
+         delete from
+         user_category
+         <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME= #{name}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="parId != null and parId!= ''">
+                AND PAR_ID= #{parId}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+        </where>
+    </delete>
+<!--    <delete id="delete" parameterType="java.lang.String">-->
+<!--    </delete>-->
+</mapper>
+

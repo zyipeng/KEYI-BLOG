@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.CommentInfoDao">
+    <select id="get" parameterType="java.lang.String" resultType="CommentInfo">
+        select
+           ID,
+           USER_ID,
+           REPLY_USER_ID,
+           USER_NAME,
+           REPLY_USER_NAME,
+           ROOT_ID,
+           PAR_ID,
+           ARTICLE_ID,
+           HEAD_PATH,
+           LIKE_COUNT,
+           HATE_COUNT,
+           CONTENT,
+           CREATE_TIME,
+           DEL_FLAG
+        from comment_info
+           ID = #{id}
+    </select>
+    <!--    <select id="get" parameterType="java.lang.String" resultType="CommentInfo">-->
+    <!--    </select>-->
+    <select id="findRootList" parameterType="java.lang.String" resultType="CommentInfo">
+        select
+           ID,
+           USER_ID,
+           REPLY_USER_ID,
+           USER_NAME,
+           REPLY_USER_NAME,
+           ROOT_ID,
+           PAR_ID,
+           ARTICLE_ID,
+           HEAD_PATH,
+           LIKE_COUNT,
+           HATE_COUNT,
+           CONTENT,
+           CREATE_TIME,
+           DEL_FLAG
+        from comment_info
+        where (PAR_ID is null OR PAR_ID = '')
+        AND ARTICLE_ID = #{artId}
+        AND DEL_FLAG = 0
+    </select>
+    <select id="findChildList" parameterType="CommentInfo" resultType="CommentInfo">
+        select
+           ID,
+           USER_ID,
+           REPLY_USER_ID,
+           USER_NAME,
+           REPLY_USER_NAME,
+           ROOT_ID,
+           PAR_ID,
+           ARTICLE_ID,
+           HEAD_PATH,
+           LIKE_COUNT,
+           HATE_COUNT,
+           CONTENT,
+           CREATE_TIME,
+           DEL_FLAG
+        from comment_info
+        where ROOT_ID = #{id}
+        AND ARTICLE_ID = #{articleId}
+        AND DEL_FLAG = 0
+    </select>
+    <select id="findList" parameterType="CommentInfo" resultType="CommentInfo">
+        select
+        ID,
+        USER_ID,
+        REPLY_USER_ID,
+        USER_NAME,
+        REPLY_USER_NAME,
+        ROOT_ID,
+        PAR_ID,
+        ARTICLE_ID,
+        HEAD_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        CONTENT,
+        CREATE_TIME,
+        DEL_FLAG
+        from comment_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="replyUserId != null and replyUserId!= ''">
+                AND REPLY_USER_ID= #{replyUserId}
+            </if>
+            <if test="rootId != null and rootId!= ''">
+                AND ROOT_ID= #{rootId}
+            </if>
+            <if test="parId != null and parId!= ''">
+                AND PAR_ID= #{parId}
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                AND ARTICLE_ID= #{articleId}
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                AND HEAD_PATH= #{headPath}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="content != null and content!= ''">
+                AND CONTENT= #{content}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" parameterType="CommentInfo" resultType="CommentInfo">
+        select
+        ID,
+        USER_ID,
+        REPLY_USER_ID,
+        USER_NAME,
+        REPLY_USER_NAME,
+        ROOT_ID,
+        PAR_ID,
+        ARTICLE_ID,
+        HEAD_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        CONTENT,
+        CREATE_TIME,
+        DEL_FLAG
+        from comment_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="replyUserId != null and replyUserId!= ''">
+                AND REPLY_USER_ID= #{replyUserId}
+            </if>
+            <if test="rootId != null and rootId!= ''">
+                AND ROOT_ID= #{rootId}
+            </if>
+            <if test="parId != null and parId!= ''">
+                AND PAR_ID= #{parId}
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                AND ARTICLE_ID= #{articleId}
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                AND HEAD_PATH= #{headPath}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="content != null and content!= ''">
+                AND CONTENT= #{content}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+        </where>
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="CommentInfo">
+        select
+        ID,
+        USER_ID,
+        REPLY_USER_ID,
+        USER_NAME,
+        REPLY_USER_NAME,
+        ROOT_ID,
+        PAR_ID,
+        ARTICLE_ID,
+        HEAD_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        CONTENT,
+        CREATE_TIME,
+        DEL_FLAG
+        from comment_info
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+    <insert id="insert" parameterType="CommentInfo">
+        insert into comment_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id!= ''">
+                ID,
+            </if>
+            <if test="userId != null and userId!= ''">
+                USER_ID,
+            </if>
+            <if test="replyUserId != null and replyUserId!= ''">
+                REPLY_USER_ID,
+            </if>
+            <if test="rootId != null and rootId!= ''">
+                ROOT_ID,
+            </if>
+            <if test="parId != null and parId!= ''">
+                PAR_ID,
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                ARTICLE_ID,
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                HEAD_PATH,
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                LIKE_COUNT,
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                HATE_COUNT,
+            </if>
+            <if test="content != null and content!= ''">
+                CONTENT,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                DEL_FLAG,
+            </if>
+            <if test="userName != null and userName!= ''">
+                USER_NAME,
+            </if>
+            <if test="replyUserName != null and replyUserName!= ''">
+                REPLY_USER_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id!= ''">
+                #{id},
+            </if>
+            <if test="userId != null and userId!= ''">
+                #{userId},
+            </if>
+            <if test="replyUserId != null and replyUserId!= ''">
+                #{replyUserId},
+            </if>
+            <if test="rootId != null and rootId!= ''">
+                #{rootId},
+            </if>
+            <if test="parId != null and parId!= ''">
+                #{parId},
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                #{articleId},
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                #{headPath},
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                #{likeCount},
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                #{hateCount},
+            </if>
+            <if test="content != null and content!= ''">
+                #{content},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                #{delFlag},
+            </if>
+            <if test="userName != null and userName!= ''">
+                #{userName},
+            </if>
+            <if test="replyUserName != null and replyUserName!= ''">
+                #{replyUserName},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="java.lang.String">
+        update comment_info
+        <set>
+            <if test="userId != null ">
+                USER_ID= #{userId},
+            </if>
+            <if test="replyUserId != null ">
+                REPLY_USER_ID= #{replyUserId},
+            </if>
+            <if test="rootId != null ">
+                ROOT_ID= #{rootId},
+            </if>
+            <if test="parId != null ">
+                PAR_ID= #{parId},
+            </if>
+            <if test="articleId != null ">
+                ARTICLE_ID= #{articleId},
+            </if>
+            <if test="headPath != null ">
+                HEAD_PATH= #{headPath},
+            </if>
+            <if test="likeCount != null ">
+                LIKE_COUNT= #{likeCount},
+            </if>
+            <if test="hateCount != null ">
+                HATE_COUNT= #{hateCount},
+            </if>
+            <if test="content != null ">
+                CONTENT= #{content},
+            </if>
+            <if test="createTime != null ">
+                CREATE_TIME= #{createTime},
+            </if>
+            <if test="delFlag != null ">
+                DEL_FLAG= #{delFlag},
+            </if>
+            <if test="userName != null ">
+                USER_NAME= #{userName},
+            </if>
+            <if test="replyUserName != null ">
+                REPLY_USER_NAME= #{replyUserName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="CommentInfo">
+        delete from
+        comment_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="replyUserId != null and replyUserId!= ''">
+                AND REPLY_USER_ID= #{replyUserId}
+            </if>
+            <if test="rootId != null and rootId!= ''">
+                AND ROOT_ID= #{rootId}
+            </if>
+            <if test="parId != null and parId!= ''">
+                AND PAR_ID= #{parId}
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                AND ARTICLE_ID= #{articleId}
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                AND HEAD_PATH= #{headPath}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="content != null and content!= ''">
+                AND CONTENT= #{content}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+        </where>
+    </delete>
+    <!--    <delete id="delete" parameterType="java.lang.String">-->
+    <!--    </delete>-->
+    <select id="count" resultType="int">
+    select count(0) from comment_info;
+    </select>
+</mapper>
+

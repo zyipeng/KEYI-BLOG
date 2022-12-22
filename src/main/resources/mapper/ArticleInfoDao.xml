@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.ArticleInfoDao">
+    <select id="get" parameterType="java.lang.String" resultType="ArticleInfo">
+        select
+           ID,
+           USER_ID,
+           CATEGORY_ID,
+           NAME,
+           INTRO,
+           PATH,
+           IMG_PATH,
+           LIKE_COUNT,
+           HATE_COUNT,
+            COLLECT_COUNT,
+           COMMENT_COUNT,
+           VISIT_COUNT,
+           CREATE_TIME,
+           ISSUE_TIME,
+           HIDE_FLAG,
+           ISSUE_FLAG,
+           ORIGINAL_FLAG,
+           DEL_FLAG,
+           Label_Id
+        from article_info
+        where ID = #{id}
+    </select>
+    <!--    <select id="get" parameterType="java.lang.String" resultType="ArticleInfo">-->
+    <!--    </select>-->
+    <select id="findList" parameterType="ArticleInfo" resultType="ArticleInfo">
+        select
+        ID,
+        USER_ID,
+        CATEGORY_ID,
+        NAME,
+        INTRO,
+        PATH,
+        IMG_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        COLLECT_COUNT,
+        COMMENT_COUNT,
+        VISIT_COUNT,
+        CREATE_TIME,
+        ISSUE_TIME,
+        HIDE_FLAG,
+        ISSUE_FLAG,
+        ORIGINAL_FLAG,
+        DEL_FLAG,
+        Label_Id
+        from article_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="categoryId != null and categoryId!= ''">
+                AND CATEGORY_ID= #{categoryId}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME like #{name}
+            </if>
+            <if test="intro != null and intro!= ''">
+                AND INTRO= #{intro}
+            </if>
+            <if test="path != null and path!= ''">
+                AND PATH= #{path}
+            </if>
+            <if test="imgPath != null and imgPath!= ''">
+                AND IMG_PATH= #{imgPath}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="commentCount != null and commentCount!= ''">
+                AND COMMENT_COUNT= #{commentCount}
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                AND VISIT_COUNT= #{visitCount}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="issueTime != null">
+                AND ISSUE_TIME= #{issueTime}
+            </if>
+            <if test="hideFlag != null and hideFlag!= ''">
+                AND HIDE_FLAG= #{hideFlag}
+            </if>
+            <if test="issueFlag != null and issueFlag!= ''">
+                AND ISSUE_FLAG= #{issueFlag}
+            </if>
+            <if test="originalFlag != null and originalFlag!= ''">
+                AND ORIGINAL_FLAG= #{originalFlag}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+            <if test="labelId != null and labelId!= ''">
+                AND Label_Id= #{labelId}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" parameterType="ArticleInfo" resultType="ArticleInfo">
+        select
+        ID,
+        USER_ID,
+        CATEGORY_ID,
+        NAME,
+        INTRO,
+        PATH,
+        IMG_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        COLLECT_COUNT,
+        COMMENT_COUNT,
+        VISIT_COUNT,
+        CREATE_TIME,
+        ISSUE_TIME,
+        HIDE_FLAG,
+        ISSUE_FLAG,
+        ORIGINAL_FLAG,
+        DEL_FLAG,
+        Label_Id
+        from article_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="categoryId != null and categoryId!= ''">
+                AND CATEGORY_ID= #{categoryId}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME like #{name}
+            </if>
+            <if test="intro != null and intro!= ''">
+                AND INTRO= #{intro}
+            </if>
+            <if test="path != null and path!= ''">
+                AND PATH= #{path}
+            </if>
+            <if test="imgPath != null and imgPath!= ''">
+                AND IMG_PATH= #{imgPath}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="commentCount != null and commentCount!= ''">
+                AND COMMENT_COUNT= #{commentCount}
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                AND VISIT_COUNT= #{visitCount}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="issueTime != null">
+                AND ISSUE_TIME= #{issueTime}
+            </if>
+            <if test="hideFlag != null and hideFlag!= ''">
+                AND HIDE_FLAG= #{hideFlag}
+            </if>
+            <if test="issueFlag != null and issueFlag!= ''">
+                AND ISSUE_FLAG= #{issueFlag}
+            </if>
+            <if test="originalFlag != null and originalFlag!= ''">
+                AND ORIGINAL_FLAG= #{originalFlag}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+            <if test="labelId != null and labelId!= ''">
+                AND Label_Id= #{labelId}
+            </if>
+        </where>
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="ArticleInfo">
+        select
+        ID,
+        USER_ID,
+        CATEGORY_ID,
+        NAME,
+        INTRO,
+        PATH,
+        IMG_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        COLLECT_COUNT,
+        COMMENT_COUNT,
+        VISIT_COUNT,
+        CREATE_TIME,
+        ISSUE_TIME,
+        HIDE_FLAG,
+        ISSUE_FLAG,
+        ORIGINAL_FLAG,
+        DEL_FLAG,
+        Label_Id
+        from article_info
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="ArticleInfo">
+        insert into article_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id!= ''">
+                ID,
+            </if>
+            <if test="userId != null and userId!= ''">
+                USER_ID,
+            </if>
+            <if test="categoryId != null and categoryId!= ''">
+                CATEGORY_ID,
+            </if>
+            <if test="name != null and name!= ''">
+                NAME,
+            </if>
+            <if test="intro != null and intro!= ''">
+                INTRO,
+            </if>
+            <if test="path != null and path!= ''">
+                PATH,
+            </if>
+            <if test="imgPath != null and imgPath!= ''">
+                IMG_PATH,
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                LIKE_COUNT,
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                HATE_COUNT,
+            </if>
+            <if test="commentCount != null and commentCount!= ''">
+                COMMENT_COUNT,
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                VISIT_COUNT,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="issueTime != null">
+                ISSUE_TIME,
+            </if>
+            <if test="hideFlag != null and hideFlag!= ''">
+                HIDE_FLAG,
+            </if>
+            <if test="issueFlag != null and issueFlag!= ''">
+                ISSUE_FLAG,
+            </if>
+            <if test="originalFlag != null and originalFlag!= ''">
+                ORIGINAL_FLAG,
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                DEL_FLAG,
+            </if>
+            <if test="labelId != null and labelId!= ''">
+                Label_Id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id!= ''">
+                #{id},
+            </if>
+            <if test="userId != null and userId!= ''">
+                #{userId},
+            </if>
+            <if test="categoryId != null and categoryId!= ''">
+                #{categoryId},
+            </if>
+            <if test="name != null and name!= ''">
+                #{name},
+            </if>
+            <if test="intro != null and intro!= ''">
+                #{intro},
+            </if>
+            <if test="path != null and path!= ''">
+                #{path},
+            </if>
+            <if test="imgPath != null and imgPath!= ''">
+                #{imgPath},
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                #{likeCount},
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                #{hateCount},
+            </if>
+            <if test="commentCount != null and commentCount!= ''">
+                #{commentCount},
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                #{visitCount},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="issueTime != null">
+                #{issueTime},
+            </if>
+            <if test="hideFlag != null and hideFlag!= ''">
+                #{hideFlag},
+            </if>
+            <if test="issueFlag != null and issueFlag!= ''">
+                #{issueFlag},
+            </if>
+            <if test="originalFlag != null and originalFlag!= ''">
+                #{originalFlag},
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                #{delFlag},
+            </if>
+            <if test="labelId != null and labelId!= ''">
+                #{labelId},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="java.lang.String">
+        update article_info
+        <set>
+            <if test="id != null ">
+                ID= #{id},
+            </if>
+            <if test="userId != null ">
+                USER_ID= #{userId},
+            </if>
+            <if test="categoryId != null ">
+                CATEGORY_ID= #{categoryId},
+            </if>
+            <if test="name != null ">
+                NAME like #{name},
+            </if>
+            <if test="intro != null ">
+                INTRO= #{intro},
+            </if>
+            <if test="path != null ">
+                PATH= #{path},
+            </if>
+            <if test="imgPath != null ">
+                IMG_PATH= #{imgPath},
+            </if>
+            <if test="likeCount != null ">
+                LIKE_COUNT= #{likeCount},
+            </if>
+            <if test="hateCount != null ">
+                HATE_COUNT= #{hateCount},
+            </if>
+            <if test="commentCount != null ">
+                COMMENT_COUNT= #{commentCount},
+            </if>
+            <if test="visitCount != null ">
+                VISIT_COUNT= #{visitCount},
+            </if>
+            <if test="createTime != null ">
+                CREATE_TIME= #{createTime},
+            </if>
+            <if test="issueTime != null ">
+                ISSUE_TIME= #{issueTime},
+            </if>
+            <if test="hideFlag != null ">
+                HIDE_FLAG= #{hideFlag},
+            </if>
+            <if test="issueFlag != null ">
+                ISSUE_FLAG= #{issueFlag},
+            </if>
+            <if test="originalFlag != null ">
+                ORIGINAL_FLAG= #{originalFlag},
+            </if>
+            <if test="delFlag != null ">
+                DEL_FLAG= #{delFlag},
+            </if>
+            <if test="labelId != null ">
+                Label_Id= #{labelId},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="delete" parameterType="ArticleInfo">
+        delete from
+        article_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="categoryId != null and categoryId!= ''">
+                AND CATEGORY_ID= #{categoryId}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME like #{name}
+            </if>
+            <if test="intro != null and intro!= ''">
+                AND INTRO= #{intro}
+            </if>
+            <if test="path != null and path!= ''">
+                AND PATH= #{path}
+            </if>
+            <if test="imgPath != null and imgPath!= ''">
+                AND IMG_PATH= #{imgPath}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="commentCount != null and commentCount!= ''">
+                AND COMMENT_COUNT= #{commentCount}
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                AND VISIT_COUNT= #{visitCount}
+            </if>
+            <if test="createTime != null">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="issueTime != null">
+                AND ISSUE_TIME= #{issueTime}
+            </if>
+            <if test="hideFlag != null and hideFlag!= ''">
+                AND HIDE_FLAG= #{hideFlag}
+            </if>
+            <if test="issueFlag != null and issueFlag!= ''">
+                AND ISSUE_FLAG= #{issueFlag}
+            </if>
+            <if test="originalFlag != null and originalFlag!= ''">
+                AND ORIGINAL_FLAG= #{originalFlag}
+            </if>
+            <if test="delFlag != null and delFlag!= ''">
+                AND DEL_FLAG= #{delFlag}
+            </if>
+            <if test="labelId != null and labelId!= ''">
+                AND Label_Id= #{labelId}
+            </if>
+        </where>
+    </delete>
+    <!--    <delete id="delete" parameterType="java.lang.String">-->
+    <!--    </delete>-->
+    <insert id="addCollectArticle" parameterType="java.lang.String">
+        insert into
+        collect_article(
+        user_id,
+        article_id,
+        create_time)
+        VALUES (
+        #{userId},
+        #{articleId},
+        now()
+        )
+    </insert>
+
+    <delete id="delCollect" parameterType="java.lang.String">
+        delete
+        from collect_article
+        where USER_ID = #{userId}
+          and ARTICLE_ID = #{articleId}
+    </delete>
+
+    <select id="collectListByUserId" resultType="ArticleInfo">
+        select
+        ID,
+        USER_ID,
+        CATEGORY_ID,
+        NAME,
+        INTRO,
+        PATH,
+        IMG_PATH,
+        LIKE_COUNT,
+        HATE_COUNT,
+        COLLECT_COUNT,
+        COMMENT_COUNT,
+        VISIT_COUNT,
+        CREATE_TIME,
+        ISSUE_TIME,
+        HIDE_FLAG,
+        ISSUE_FLAG,
+        ORIGINAL_FLAG,
+        DEL_FLAG,
+        Label_Id
+        from article_info
+        where ID in (
+            select ARTICLE_ID
+            from collect_article
+            where collect_article.USER_ID = #{userId}
+        )
+    </select>
+
+    <select id="haveCollect" parameterType="java.lang.String" resultType="int">
+        select count(0)
+        from collect_article
+        where collect_article.USER_ID = #{userId}
+        and collect_article.ARTICLE_ID = #{articleId}
+    </select>
+
+    <update id="updateCollectCount">
+        update article_info
+        set COLLECT_COUNT = COLLECT_COUNT + #{i}
+        where ID = #{articleId}
+    </update>
+    <update id="updateCommentCount">
+        update article_info
+        set COMMENT_COUNT = COMMENT_COUNT + 1
+        where ID = #{articleId}
+    </update>
+    <update id="updateVisitCount">
+        update article_info
+        set VISIT_COUNT = VISIT_COUNT + 1
+        where ID = #{articleId}
+    </update>
+</mapper>

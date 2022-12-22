@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大作业_弹幕</title>
+    <style>
+        .videoBox {
+            width: 800px;
+            height: 500px;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+        .danmu {
+            color: #f00;
+            font-size: 20px;
+            position: absolute;
+            left: 800px;
+            top: 0;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="videoBox">
+    </div>
+</body>
+<script src="../jquery/jquery-3.4.1.min.js"></script>
+<script>
+    var oVideoBox = document.querySelector('.videoBox')
+
+    var danmus="[\n" +
+        "    {\n" +
+        "        \"blogId\": \"1\", \n" +
+        "        \"commentId\": \"1\", \n" +
+        "        \"value\": \"你好1！！！\"\n" +
+        "    }, \n" +
+        "    {\n" +
+        "        \"blogId\": \"2\", \n" +
+        "        \"commentId\": \"2\", \n" +
+        "        \"value\": \"你好2！！！\"\n" +
+        "    }, \n" +
+        "    {\n" +
+        "        \"blogId\": \"3\", \n" +
+        "        \"commentId\": \"3\", \n" +
+        "        \"value\": \"你好3！！！\"\n" +
+        "    }, \n" +
+        "    {\n" +
+        "        \"blogId\": \"4\", \n" +
+        "        \"commentId\": \"4\", \n" +
+        "        \"value\": \"你好4！！！\"\n" +
+        "    }\n" +
+        "]"
+
+
+    $(function () {
+        sends();
+        window.setInterval(sends, 3000);
+    })
+
+    function sends() {
+        var danmusJSON = JSON.parse(danmus);
+        danmusJSON.forEach(function (value, index, array) {
+            add(value.value);
+        });
+    }
+
+    function add(content) {
+        if (!content) {
+            alert('sss');
+            return
+        }
+        var oSpan = document.createElement('span');
+        oSpan.className = 'danmu';
+        oSpan.innerHTML = content;
+        oVideoBox.appendChild(oSpan);
+        var maxTop = oVideoBox.clientHeight - oSpan.offsetHeight;
+        oSpan.style.top = Math.round(Math.random() * maxTop) + 'px';
+        // console.log( maxTop,oSpan.offsetHeight);
+
+        var timer = setInterval(() => {
+            var start = oSpan.offsetLeft;
+            start -= 1;
+            // console.log(start);
+
+            oSpan.style.left = start + 'px';
+
+            if (start < -oSpan.offsetWidth) {
+                clearInterval(timer);
+                oSpan.remove();
+            }
+        }, 10);
+    }
+</script>
+
+</html>

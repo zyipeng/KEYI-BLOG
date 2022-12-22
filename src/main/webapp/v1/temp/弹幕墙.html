@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>danmu</title>
+    <link href="${baseurl}/v1/../bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="${baseurl}/v1/bootstrap/css/animate.css" rel="stylesheet"> -->
+    <!--   <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
+    <style>
+        /**{*/
+
+        /*    font-size: 50px;*/
+        /*}*/
+        .move {
+            font-size: 20px;
+            display: block;
+            position: absolute;
+        }
+
+        .wallpaper {
+            height: 400px;
+            border: 1px solid #9A9FB3;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            /* background-color: #FCF7F7;*/
+            overflow: hidden;
+        }
+
+        .setpad {
+            padding: 0 5px 0 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="wallpaper col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 "></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-3">
+            <input type="text" class="form-control" placeholder="弹幕内容" id="danmu">
+        </div>
+        <div class="col-sm-2 col-md-1 setpad">
+            <button class="form-control btn btn-info" id="send">发射弹幕</button>
+        </div>
+        <div class="col-sm-2 col-md-1 setpad">
+            <button class="form-control btn btn-danger" id="clear">清屏</button>
+        </div>
+    </div>
+</div>
+<script src="../jquery/jquery-3.4.1.min.js"></script>
+</body>
+<script>
+    var danmus="[\n" +
+        "    {\n" +
+        "        \"blogId\": \"1\", \n" +
+        "        \"commentId\": \"1\", \n" +
+        "        \"value\": \"你好1！！！\"\n" +
+        "    }, \n" +
+        "    {\n" +
+        "        \"blogId\": \"2\", \n" +
+        "        \"commentId\": \"2\", \n" +
+        "        \"value\": \"你好2！！！\"\n" +
+        "    }, \n" +
+        "    {\n" +
+        "        \"blogId\": \"3\", \n" +
+        "        \"commentId\": \"3\", \n" +
+        "        \"value\": \"你好3！！！\"\n" +
+        "    }, \n" +
+        "    {\n" +
+        "        \"blogId\": \"4\", \n" +
+        "        \"commentId\": \"4\", \n" +
+        "        \"value\": \"你好4！！！\"\n" +
+        "    }\n" +
+        "]"
+
+    $(function () {
+        sends();
+        window.setInterval(sends, 3000);
+    })
+    function sends(){
+        var timers = [];
+        var danmusJSON = JSON.parse(danmus);
+        danmusJSON.forEach(function (value, index, array) {
+            var div = $("<div></div>");
+            var that = div;
+            that.html("<a href='goto?blogId="+value.blogId+"&commentId="+value.commentId+"'>"+value.value+"</a>");
+            // console.log(that.html())
+            that.addClass("move")
+            //init
+            var r = Math.floor(Math.random() * 254);
+            var g = Math.floor(Math.random() * 254);
+            var b = Math.floor(Math.random() * 254);
+            that.css({
+                "color": "rgb(" + r + "," + g + "," + b + ")",
+                top: Math.floor(Math.random() * ($(".wallpaper").height()-2)+2) + "px",
+                right: ($(".wallpaper").offsetLeft+$(".wallpaper").width+300)+"px",
+                width: "300px"
+            })
+            console.log($(".wallpaper").offset().left)
+            that.find("a").css({
+                "color": "rgb(" + r + "," + g + "," + b + ")",
+                "font-size": (Math.floor(Math.random()*10)+20)+"px"
+            })
+            $(".wallpaper").append(div)
+            // console.log(that.width())
+            //move
+            var i = 0;
+            var timer = setInterval(function() {
+                var thatt = that;
+                thatt.css({
+                    right: (i += 1) + "px"
+                });
+                if ((that.offset().left + that.width()) < $(".wallpaper").offset().left) {
+                    that.remove()
+                    clearInterval(timer)
+                }
+
+            }, 10)
+            timers.push(timer)
+        });
+    }
+
+    $("#send").click(function() {
+        var div = $("<div></div>");
+        var value = $("#danmu").val();
+        var that = div;
+        that.html(value)
+        that.addClass("move")
+        $(".wallpaper").append(div)
+        init(that)
+        move(that)
+    })
+    // 清除弹幕
+    $("#clear").click(function() {
+        for (var i = 0; i < timers.length; i++) {
+            clearInterval(timers[i])
+        }
+        $(".move").remove()
+    })
+    // 把每一个setInterval 放到数组中
+    // div 移动
+    function move(that) {
+        var i = 0;
+        var timer = setInterval(function() {
+            that.css({
+                right: (i += 1) + "px"
+            });
+            if ((that.offset().left + that.width()) < $(".wallpaper").offset().left) {
+                that.remove()
+                clearInterval(timer)
+            }
+
+        }, 10)
+        timers.push(timer)
+
+    }
+    // 初始化div 设置div宽度，字体颜色，
+    function init(that) {
+
+        var r = Math.floor(Math.random() * 254);
+        var g = Math.floor(Math.random() * 254);
+        var b = Math.floor(Math.random() * 254);
+        that.css({
+            "color": "rgb(" + r + "," + g + "," + b + ")",
+            top: Math.floor(Math.random() * $(".wallpaper").height()) + "px",
+            right: -that.width(),
+            width: that.width()
+        })
+        console.log(that.width())
+    }
+</script>
+</html>

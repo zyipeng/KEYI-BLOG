@@ -1,0 +1,13 @@
+/*
+.container div{
+    border: solid 1px black;
+}*/
+.treeview>.list-group{
+    margin-bottom: 0px;
+}
+.list-group-item>.table{
+    margin-bottom: 0px;
+}
+ul .list-group{
+    margin-bottom: 5px;
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.LabelInfoDao">
+    <select id="get" parameterType="java.lang.String" resultType="LabelInfo">
+        select
+           ID,
+           NAME,
+           CREATE_USER_NAME,
+           CREATE_TIME
+        from label_info
+           ID = #{id}
+    </select>
+<!--    <select id="get" parameterType="java.lang.String" resultType="LabelInfo">-->
+<!--    </select>-->
+    <select id="findList" parameterType="LabelInfo" resultType="LabelInfo">
+        select
+           ID,
+           NAME,
+           CREATE_USER_NAME,
+           CREATE_TIME
+        from label_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME= #{name}
+            </if>
+            <if test="createUserName != null and createUserName!= ''">
+                AND CREATE_USER_NAME= #{createUserName}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                AND CREATE_TIME= #{createTime}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" parameterType="LabelInfo" resultType="LabelInfo">
+        select
+           ID,
+           NAME,
+           CREATE_USER_NAME,
+           CREATE_TIME
+        from label_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME= #{name}
+            </if>
+            <if test="createUserName != null and createUserName!= ''">
+                AND CREATE_USER_NAME= #{createUserName}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                AND CREATE_TIME= #{createTime}
+            </if>
+        </where>
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="LabelInfo">
+        select
+           ID,
+           NAME,
+           CREATE_USER_NAME,
+           CREATE_TIME
+        from label_info
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+    <select id="findRedWordList" resultType="java.lang.String">
+        select * from red_search_word limit 0,10;
+    </select>
+    <insert id="insert" parameterType="LabelInfo">
+         insert into label_info(
+            ID,
+            NAME,
+            CREATE_USER_NAME,
+            CREATE_TIME
+         ) values (
+            #{id},
+            #{name},
+            #{createUserName},
+            #{createTime}
+         )
+    </insert>
+    <delete id="delete" parameterType="LabelInfo">
+         delete from
+         label_info
+         <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="name != null and name!= ''">
+                AND NAME= #{name}
+            </if>
+            <if test="createUserName != null and createUserName!= ''">
+                AND CREATE_USER_NAME= #{createUserName}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                AND CREATE_TIME= #{createTime}
+            </if>
+        </where>
+    </delete>
+<!--    <delete id="delete" parameterType="java.lang.String">-->
+<!--    </delete>-->
+</mapper>
+

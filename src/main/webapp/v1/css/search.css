@@ -1,0 +1,9 @@
+/*.container div{*/
+/*    border: solid 1px black;*/
+/*}*/
+.container-fluid .media{
+    border: solid 1px black;
+    box-sizing: border-box;
+    margin: 5px;
+    padding: 5px;
+}

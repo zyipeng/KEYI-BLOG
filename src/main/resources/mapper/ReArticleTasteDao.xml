@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.ReArticleTasteDao">
+    <select id="get" parameterType="java.lang.String" resultType="ReArticleTaste">
+        select
+           USER_ID,
+           ARTICLE_ID,
+           TASTE
+        from re_article_taste
+           ID = #{id}
+    </select>
+<!--    <select id="get" parameterType="java.lang.String" resultType="ReArticleTaste">-->
+<!--    </select>-->
+    <select id="findList" parameterType="ReArticleTaste" resultType="ReArticleTaste">
+        select
+           USER_ID,
+           ARTICLE_ID,
+           TASTE
+        from re_article_taste
+        <where>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                AND ARTICLE_ID= #{articleId}
+            </if>
+            <if test="taste != null and taste!= ''">
+                AND TASTE= #{taste}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" parameterType="ReArticleTaste" resultType="ReArticleTaste">
+        select
+           USER_ID,
+           ARTICLE_ID,
+           TASTE
+        from re_article_taste
+        <where>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                AND ARTICLE_ID= #{articleId}
+            </if>
+            <if test="taste != null and taste!= ''">
+                AND TASTE= #{taste}
+            </if>
+        </where>
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="ReArticleTaste">
+        select
+           USER_ID,
+           ARTICLE_ID,
+           TASTE
+        from re_article_taste
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+    <insert id="insert" parameterType="ReArticleTaste">
+         insert into re_article_taste(
+            USER_ID,
+            ARTICLE_ID,
+            TASTE
+         ) values (
+            #{userId},
+            #{articleId},
+            #{taste}
+         )
+    </insert>
+    <delete id="delete" parameterType="ReArticleTaste">
+         delete from
+         re_article_taste
+         <where>
+            <if test="userId != null and userId!= ''">
+                AND USER_ID= #{userId}
+            </if>
+            <if test="articleId != null and articleId!= ''">
+                AND ARTICLE_ID= #{articleId}
+            </if>
+            <if test="taste != null and taste!= ''">
+                AND TASTE= #{taste}
+            </if>
+        </where>
+    </delete>
+<!--    <delete id="delete" parameterType="java.lang.String">-->
+<!--    </delete>-->
+</mapper>
+

@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.UserInfoDao">
+    <select id="get" parameterType="java.lang.String" resultType="UserInfo">
+        select
+           ID,
+           USER_NAME,
+           PWD,
+           ROLE,
+           EMAIL,
+           PHONE_CODE,
+           QQ,
+           WECHAT,
+           SEX,
+           BIRTHDAY,
+           LIKE_COUNT,
+           HATE_COUNT,
+           VISIT_COUNT,
+           ARTICLE_COUNT,
+           HEAD_PATH,
+           CREATE_TIME,
+           LIKE_USER_COUNT,
+           LIKED_USER_COUNT,
+           INTRO,
+           INTER
+        from user_info
+        where
+           ID = #{id}
+    </select>
+    <!--    <select id="get" parameterType="java.lang.String" resultType="UserInfo">-->
+    <!--    </select>-->
+
+    <select id="exist" parameterType="UserInfo" resultType="UserInfo">
+        select
+        ID,
+        USER_NAME,
+        PWD,
+        ROLE,
+        EMAIL,
+        PHONE_CODE,
+        QQ,
+        WECHAT,
+        SEX,
+        BIRTHDAY,
+        LIKE_COUNT,
+        HATE_COUNT,
+        VISIT_COUNT,
+        ARTICLE_COUNT,
+        HEAD_PATH,
+        CREATE_TIME,
+        LIKE_USER_COUNT,
+        LIKED_USER_COUNT,
+        INTRO,
+        INTER
+        from user_info
+        <where>
+            <if test="userName != null and userName!= ''">
+                OR USER_NAME like #{userName}
+            </if>
+            <if test="email != null and email!= ''">
+                OR EMAIL= #{email}
+            </if>
+        </where>
+    </select>
+    <select id="findList" parameterType="UserInfo" resultType="UserInfo">
+        select
+        ID,
+        USER_NAME,
+        PWD,
+        ROLE,
+        EMAIL,
+        PHONE_CODE,
+        QQ,
+        WECHAT,
+        SEX,
+        BIRTHDAY,
+        LIKE_COUNT,
+        HATE_COUNT,
+        VISIT_COUNT,
+        ARTICLE_COUNT,
+        HEAD_PATH,
+        CREATE_TIME,
+        LIKE_USER_COUNT,
+        LIKED_USER_COUNT,
+        INTRO,
+        INTER
+        from user_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userName != null and userName!= ''">
+                AND USER_NAME like #{userName}
+            </if>
+            <if test="pwd != null and pwd!= ''">
+                AND PWD= #{pwd}
+            </if>
+            <if test="role != null and role!= ''">
+                AND ROLE= #{role}
+            </if>
+            <if test="email != null and email!= ''">
+                AND EMAIL= #{email}
+            </if>
+            <if test="phoneCode != null and phoneCode!= ''">
+                AND PHONE_CODE= #{phoneCode}
+            </if>
+            <if test="qq != null and qq!= ''">
+                AND QQ= #{qq}
+            </if>
+            <if test="wechat != null and wechat!= ''">
+                AND WECHAT= #{wechat}
+            </if>
+            <if test="sex != null and sex!= ''">
+                AND SEX= #{sex}
+            </if>
+            <if test="birthday != null and birthday!= ''">
+                AND BIRTHDAY= #{birthday}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                AND VISIT_COUNT= #{visitCount}
+            </if>
+            <if test="articleCount != null and articleCount!= ''">
+                AND ARTICLE_COUNT= #{articleCount}
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                AND HEAD_PATH= #{headPath}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="likeUserCount != null and likeUserCount!= ''">
+                AND LIKE_USER_COUNT= #{likeUserCount}
+            </if>
+            <if test="likedUserCount != null and likedUserCount!= ''">
+                AND LIKED_USER_COUNT= #{likedUserCount}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" parameterType="UserInfo" resultType="UserInfo">
+        select
+        ID,
+        USER_NAME,
+        PWD,
+        ROLE,
+        EMAIL,
+        PHONE_CODE,
+        QQ,
+        WECHAT,
+        SEX,
+        BIRTHDAY,
+        LIKE_COUNT,
+        HATE_COUNT,
+        VISIT_COUNT,
+        ARTICLE_COUNT,
+        HEAD_PATH,
+        CREATE_TIME,
+        LIKE_USER_COUNT,
+        LIKED_USER_COUNT,
+        INTRO,
+        INTER
+        from user_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userName != null and userName!= ''">
+                AND USER_NAME like #{userName}
+            </if>
+            <if test="pwd != null and pwd!= ''">
+                AND PWD= #{pwd}
+            </if>
+            <if test="role != null and role!= ''">
+                AND ROLE= #{role}
+            </if>
+            <if test="email != null and email!= ''">
+                AND EMAIL= #{email}
+            </if>
+            <if test="phoneCode != null and phoneCode!= ''">
+                AND PHONE_CODE= #{phoneCode}
+            </if>
+            <if test="qq != null and qq!= ''">
+                AND QQ= #{qq}
+            </if>
+            <if test="wechat != null and wechat!= ''">
+                AND WECHAT= #{wechat}
+            </if>
+            <if test="sex != null and sex!= ''">
+                AND SEX= #{sex}
+            </if>
+            <if test="birthday != null and birthday!= ''">
+                AND BIRTHDAY= #{birthday}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                AND VISIT_COUNT= #{visitCount}
+            </if>
+            <if test="articleCount != null and articleCount!= ''">
+                AND ARTICLE_COUNT= #{articleCount}
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                AND HEAD_PATH= #{headPath}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="likeUserCount != null and likeUserCount!= ''">
+                AND LIKE_USER_COUNT= #{likeUserCount}
+            </if>
+            <if test="likedUserCount != null and likedUserCount!= ''">
+                AND LIKED_USER_COUNT= #{likedUserCount}
+            </if>
+        </where>
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="UserInfo">
+        select
+        ID,
+        USER_NAME,
+        PWD,
+        ROLE,
+        EMAIL,
+        PHONE_CODE,
+        QQ,
+        WECHAT,
+        SEX,
+        BIRTHDAY,
+        LIKE_COUNT,
+        HATE_COUNT,
+        VISIT_COUNT,
+        ARTICLE_COUNT,
+        HEAD_PATH,
+        CREATE_TIME,
+        LIKE_USER_COUNT,
+        LIKED_USER_COUNT,
+        INTRO,
+        INTER
+        from user_info
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+    <insert id="insert" parameterType="UserInfo">
+         insert into user_info(
+            ID,
+            USER_NAME,
+            PWD,
+            ROLE,
+            EMAIL,
+            PHONE_CODE,
+            QQ,
+            WECHAT,
+            SEX,
+            BIRTHDAY,
+            LIKE_COUNT,
+            HATE_COUNT,
+            VISIT_COUNT,
+            ARTICLE_COUNT,
+            HEAD_PATH,
+            CREATE_TIME,
+            LIKE_USER_COUNT,
+            LIKED_USER_COUNT,
+           INTRO,
+           INTER
+         ) values (
+            UUID(),
+            #{userName},
+            #{pwd},
+            #{role},
+            #{email},
+            #{phoneCode},
+            #{qq},
+            #{wechat},
+            #{sex},
+            #{birthday},
+            #{likeCount},
+            #{hateCount},
+            #{visitCount},
+            #{articleCount},
+            #{headPath},
+            #{createTime},
+            #{likeUserCount},
+            #{likedUserCount},
+            #{intro},
+            #{inter}
+         )
+    </insert>
+
+    <update id="update" parameterType="UserInfo">
+        update user_info
+        <set>
+            <if test="userName != null ">
+                USER_NAME= #{userName},
+            </if>
+            <if test="pwd != null ">
+                PWD= #{pwd},
+            </if>
+            <if test="role != null ">
+                ROLE= #{role},
+            </if>
+            <if test="email != null ">
+                EMAIL= #{email},
+            </if>
+            <if test="phoneCode != null ">
+                PHONE_CODE= #{phoneCode},
+            </if>
+            <if test="qq != null ">
+                QQ= #{qq},
+            </if>
+            <if test="wechat != null ">
+                WECHAT= #{wechat},
+            </if>
+            <if test="sex != null ">
+                SEX= #{sex},
+            </if>
+            <if test="birthday != null ">
+                BIRTHDAY= #{birthday},
+            </if>
+            <if test="likeCount != null ">
+                LIKE_COUNT= #{likeCount},
+            </if>
+            <if test="hateCount != null ">
+                HATE_COUNT= #{hateCount},
+            </if>
+            <if test="visitCount != null ">
+                VISIT_COUNT= #{visitCount},
+            </if>
+            <if test="articleCount != null ">
+                ARTICLE_COUNT= #{articleCount},
+            </if>
+            <if test="headPath != null ">
+                HEAD_PATH= #{headPath},
+            </if>
+            <if test="createTime != null ">
+                CREATE_TIME= #{createTime},
+            </if>
+            <if test="likeUserCount != null ">
+                LIKE_USER_COUNT= #{likeUserCount},
+            </if>
+            <if test="likedUserCount != null ">
+                LIKED_USER_COUNT= #{likedUserCount},
+            </if>
+            <if test="intro != null ">
+                INTRO= #{intro},
+            </if>
+            <if test="inter != null ">
+                inter= #{inter},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateAttentionCount">
+        update user_info
+        set LIKE_USER_COUNT = LIKE_USER_COUNT + #{i}
+        where ID = #{userId}
+    </update>
+    <update id="updateFansCount">
+        update user_info
+        set LIKED_USER_COUNT = LIKED_USER_COUNT + #{i}
+        where ID = #{userId}
+    </update>
+    <update id="updateVisitCount">
+        update user_info
+        set VISIT_COUNT = VISIT_COUNT + 1
+        where ID = #{userId}
+    </update>
+    <delete id="delete" parameterType="UserInfo">
+        delete from
+        user_info
+        <where>
+            <if test="id != null and id!= ''">
+                AND ID= #{id}
+            </if>
+            <if test="userName != null and userName!= ''">
+                AND USER_NAME like #{userName}
+            </if>
+            <if test="pwd != null and pwd!= ''">
+                AND PWD= #{pwd}
+            </if>
+            <if test="role != null and role!= ''">
+                AND ROLE= #{role}
+            </if>
+            <if test="email != null and email!= ''">
+                AND EMAIL= #{email}
+            </if>
+            <if test="phoneCode != null and phoneCode!= ''">
+                AND PHONE_CODE= #{phoneCode}
+            </if>
+            <if test="qq != null and qq!= ''">
+                AND QQ= #{qq}
+            </if>
+            <if test="wechat != null and wechat!= ''">
+                AND WECHAT= #{wechat}
+            </if>
+            <if test="sex != null and sex!= ''">
+                AND SEX= #{sex}
+            </if>
+            <if test="birthday != null and birthday!= ''">
+                AND BIRTHDAY= #{birthday}
+            </if>
+            <if test="likeCount != null and likeCount!= ''">
+                AND LIKE_COUNT= #{likeCount}
+            </if>
+            <if test="hateCount != null and hateCount!= ''">
+                AND HATE_COUNT= #{hateCount}
+            </if>
+            <if test="visitCount != null and visitCount!= ''">
+                AND VISIT_COUNT= #{visitCount}
+            </if>
+            <if test="articleCount != null and articleCount!= ''">
+                AND ARTICLE_COUNT= #{articleCount}
+            </if>
+            <if test="headPath != null and headPath!= ''">
+                AND HEAD_PATH= #{headPath}
+            </if>
+            <if test="createTime != null and createTime!= ''">
+                AND CREATE_TIME= #{createTime}
+            </if>
+            <if test="likeUserCount != null and likeUserCount!= ''">
+                AND LIKE_USER_COUNT= #{likeUserCount}
+            </if>
+            <if test="likedUserCount != null and likedUserCount!= ''">
+                AND LIKED_USER_COUNT= #{likedUserCount}
+            </if>
+        </where>
+    </delete>
+    <delete id="delAttentionUser">
+        delete
+        from attention_user
+        where USER_ID=#{userId}
+        and ATTENTION_ID=#{attentionId}
+    </delete>
+    <!--    <delete id="delete" parameterType="java.lang.String">-->
+    <!--    </delete>-->
+    <insert id="addAttentionUser" parameterType="java.lang.String">
+        insert into
+        attention_user(
+        user_id,
+        attention_id,
+        CREATE_TIME
+        ) VALUES (
+        #{userId},
+        #{attentionId},
+        now()
+        );
+    </insert>
+    <select id="attentionListByUserId" parameterType="java.lang.String" resultType="UserInfo">
+        select
+            ID,
+            USER_NAME,
+            PWD,
+            ROLE,
+            EMAIL,
+            PHONE_CODE,
+            QQ,
+            WECHAT,
+            SEX,
+            BIRTHDAY,
+            LIKE_COUNT,
+            HATE_COUNT,
+            VISIT_COUNT,
+            ARTICLE_COUNT,
+            HEAD_PATH,
+            CREATE_TIME,
+            LIKE_USER_COUNT,
+            LIKED_USER_COUNT,
+            INTRO,
+            INTER
+        from user_info
+        where ID in (
+            select
+                   ATTENTION_ID
+            from attention_user
+            where USER_ID=#{userId}
+            )
+    </select>
+
+    <select id="fansListByUserId" parameterType="java.lang.String" resultType="UserInfo">
+        select res.* from (
+            select
+                ID,
+                USER_NAME,
+                PWD,
+                ROLE,
+                EMAIL,
+                PHONE_CODE,
+                QQ,
+                WECHAT,
+                SEX,
+                BIRTHDAY,
+                LIKE_COUNT,
+                HATE_COUNT,
+                VISIT_COUNT,
+                ARTICLE_COUNT,
+                HEAD_PATH,
+                CREATE_TIME,
+                LIKE_USER_COUNT,
+                LIKED_USER_COUNT,
+                INTRO,
+                INTER,
+                (
+                select count(0)>0 from attention_user where USER_ID=#{attentionId} AND ATTENTION_ID = ID
+                )  AS ATTENTION_FLAG
+            from user_info
+            where ID in (
+                select
+                       USER_ID
+                from attention_user
+                where ATTENTION_ID=#{attentionId}
+                )
+        ) res
+    </select>
+    <select id="haveAttention" resultType="java.lang.Integer">
+        select count(0)
+        from attention_user
+        where USER_ID=#{userId}
+        and ATTENTION_ID=#{attentionId}
+    </select>
+</mapper>
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhouyp.dao.RedSearchWordDao">
+
+<!--    <select id="get" parameterType="java.lang.String" resultType="RedSearchWord">-->
+<!--    </select>-->
+    <select id="findList" parameterType="RedSearchWord" resultType="RedSearchWord">
+        select
+           word
+        from red_search_word
+        <where>
+            <if test="word != null and word!= ''">
+                AND word= #{word}
+            </if>
+        </where>
+    </select>
+    <select id="findAllList" resultType="RedSearchWord">
+        select
+           word
+        from red_search_word
+    </select>
+    <select id="findConditionList" parameterType="java.lang.String" resultType="RedSearchWord">
+        select
+           word
+        from red_search_word
+        <if test="queryCondition!=null and queryCondition!=''">
+            ${queryCondition}
+        </if>
+    </select>
+    <insert id="insert" parameterType="RedSearchWord">
+         insert into red_search_word
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="word != null and word!= ''">
+            word,
+            </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="word != null and word!= ''">
+            #{word},
+            </if>
+
+		</trim>
+    </insert>
+    <delete id="delete" parameterType="RedSearchWord">
+         delete from
+         red_search_word
+         <where>
+            <if test="word != null and word!= ''">
+                AND word= #{word}
+            </if>
+        </where>
+    </delete>
+</mapper>
+
